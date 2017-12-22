@@ -1,18 +1,23 @@
 /**
- * Represents a version number in the format of http://semver.org.
+ * Represents a version number in the format of Semantic Versioning.
+ * TODO: fully support the semver standard ? (label varargs, ...)
+ *
+ * @see <a href="http://semver.org">http://semver.org</a>
  */
 public final class Version implements Comparable<Version> {
 
   public static final Version NULL_VERSION = new Version(0, 0, 0, null);
-  private final int version;
-  private String label;
+
+  private final long version;
+  private final String label;
   private String representation;
 
   private Version(int major, int minor, int patch, String label) {
-    int version = 0;
-    version = version | (major << 16);
-    version = version | (minor << 8);
-    version = version | patch;
+    long version = major;
+    version <<= 16;
+    version |= (short) minor;
+    version <<= 16;
+    version |= (short) patch;
 
     this.version = version;
     this.label = label;
@@ -20,6 +25,7 @@ public final class Version implements Comparable<Version> {
 
   /**
    * static factory method.
+   *
    * @param major the major version number
    * @param minor the minor version number
    * @param patch the patch version number
@@ -31,10 +37,11 @@ public final class Version implements Comparable<Version> {
 
   /**
    * static factory method.
+   *
    * @param major the major version number
    * @param minor the minor version number
    * @param patch the patch version number
-   * @param label
+   * @param label a label
    * @return A Version instance representing the version major.minor.patch-label
    */
   public static Version get(int major, int minor, int patch, String label) {
@@ -55,14 +62,14 @@ public final class Version implements Comparable<Version> {
       return NULL_VERSION;
     }
 
-    byte major;
-    byte minor;
-    byte patch;
+    short major;
+    short minor;
+    short patch;
 
     try {
-      major = Byte.parseByte(parts[0]);
-      minor = Byte.parseByte(parts[1]);
-      patch = Byte.parseByte(parts[2]);
+      major = Short.parseShort(parts[0]);
+      minor = Short.parseShort(parts[1]);
+      patch = Short.parseShort(parts[2]);
     } catch (NumberFormatException ex) {
       ex.printStackTrace();
       return NULL_VERSION;
@@ -79,12 +86,14 @@ public final class Version implements Comparable<Version> {
 
   @Override
   public int compareTo(Version other) {
-    return Integer.compare(this.version, other.version);
+    return Long.compare(this.version, other.version);
   }
 
   @Override
   public int hashCode() {
-    return Integer.hashCode(version);
+    int result = Long.hashCode(version);
+    result = 31 * result + label.hashCode();
+    return result;
   }
 
   @Override
@@ -92,7 +101,7 @@ public final class Version implements Comparable<Version> {
     if (other instanceof Version) {
       Version otherVersion = (Version) other;
 
-      return this.version == otherVersion.version;
+      return this.version == otherVersion.version && this.label.equals(otherVersion.label);
     }
 
     return false;
@@ -101,7 +110,7 @@ public final class Version implements Comparable<Version> {
   @Override
   public String toString() {
     if (representation == null) {
-      representation = (byte)(version >>> 16) + "." + (byte)(version >>> 8) + "." + (byte)version;
+      representation = (short) (version >>> 32) + "." + (short) (version >>> 16) + "." + (short) version;
 
       if (label != null) {
         representation += "-" + label;
