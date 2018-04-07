@@ -1,0 +1,3 @@
+rootProject.name = 'javadump'
+
+include ':Misc'
