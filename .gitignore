@@ -104,3 +104,6 @@ gradle-app.setting
 .settings/
 .classpath
 .project
+
+### All gradle build folders
+/**/build/

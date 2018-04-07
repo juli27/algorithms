@@ -1,3 +1,5 @@
 rootProject.name = 'javadump'
 
+include ':Algorithms:Searching'
+include ':Algorithms:Sorting'
 include ':Misc'
