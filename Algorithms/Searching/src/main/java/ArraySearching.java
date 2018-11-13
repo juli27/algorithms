@@ -4,15 +4,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+import java.util.OptionalInt;
+
 public class ArraySearching {
 
-  public Integer linearSearch(int[] array, int value) {
+  public OptionalInt linearSearch(int[] array, int value) {
     for (int i = 0; i < array.length; ++i) {
       if (array[i] == value) {
-        return i;
+        return OptionalInt.of(i);
       }
     }
 
-    return null;
+    return OptionalInt.empty();
   }
 }
