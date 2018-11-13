@@ -4,6 +4,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+package sorting;
+
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,7 +28,7 @@ public class ArraySortingTests {
   private static void testInsertionSort() {
     ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    int size = random.nextInt(10,50);
+    int size = random.nextInt(10, 50);
     int[] array = new int[size];
 
     for (int i = 0; i < array.length; ++i) {
@@ -43,7 +45,7 @@ public class ArraySortingTests {
   private static void testSelectionSort() {
     ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    int size = random.nextInt(10,50);
+    int size = random.nextInt(10, 50);
     int[] array = new int[size];
 
     for (int i = 0; i < array.length; ++i) {
@@ -60,7 +62,7 @@ public class ArraySortingTests {
   private static void testMergeSort() {
     ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    int size = random.nextInt(10,50);
+    int size = random.nextInt(10, 50);
     int[] array = new int[size];
 
     for (int i = 0; i < array.length; ++i) {

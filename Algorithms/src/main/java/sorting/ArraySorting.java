@@ -4,6 +4,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+package sorting;
+
 /**
  * "reference" implementations of various sorting algorithms on an integer array.
  */
@@ -74,11 +76,10 @@ public class ArraySorting {
   }
 
   /**
-   *
-   * @param array the array
+   * @param array     the array
    * @param leftStart the leftmost element of the first sub array
-   * @param leftEnd the last element of the left sub array
-   * @param rightEnd the last element of the right sub array
+   * @param leftEnd   the last element of the left sub array
+   * @param rightEnd  the last element of the right sub array
    */
   private static void merge(int[] array, int leftStart, int leftEnd, int rightEnd) {
     int leftSize = leftEnd - leftStart + 1;
