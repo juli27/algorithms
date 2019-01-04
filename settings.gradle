@@ -1,4 +1,0 @@
-rootProject.name = 'javadump'
-
-include ':Algorithms'
-include ':Misc'
