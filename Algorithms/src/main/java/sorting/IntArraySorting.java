@@ -9,14 +9,19 @@ package sorting;
 /**
  * "reference" implementations of various sorting algorithms on an integer array.
  */
-public class ArraySorting {
+public final class IntArraySorting {
+
+  private IntArraySorting() {
+  }
 
   /**
    * property: stable
    * property: in place
-   * property: loop invariant: the sorted subarray array[0..i-1] contains the elements originally in array[0..i-1],
+   * property: loop invariant: array[0..i-1] contains the elements originally in array[0..i-1],
    * but in sorted order.
    * property: can sort as it gets new elements
+   *
+   * @param array the array of integers to be sorted
    */
   public static void insertionSort(int[] array) {
     // array[0..i-1] is sorted, array[i] to be inserted
@@ -25,7 +30,6 @@ public class ArraySorting {
 
       // move all elements in the sorted sequence greater than key up by one
       int j = i - 1;
-
       while (j >= 0 && array[j] > key) {
         array[j + 1] = array[j];
         --j;

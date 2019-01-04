@@ -12,10 +12,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ArraySortingTests {
 
   public static void main(String[] args) {
-    System.out.println("insertion sort");
-    testInsertionSort();
-    System.out.println();
-
     System.out.println("selection sort");
     testSelectionSort();
     System.out.println();
@@ -23,23 +19,6 @@ public class ArraySortingTests {
     System.out.println("merge sort");
     testMergeSort();
     System.out.println();
-  }
-
-  private static void testInsertionSort() {
-    ThreadLocalRandom random = ThreadLocalRandom.current();
-
-    int size = random.nextInt(10, 50);
-    int[] array = new int[size];
-
-    for (int i = 0; i < array.length; ++i) {
-      array[i] = random.nextInt(10000);
-    }
-
-    System.out.println("unsorted: " + Arrays.toString(array));
-
-    ArraySorting.insertionSort(array);
-
-    System.out.println("sorted  : " + Arrays.toString(array));
   }
 
   private static void testSelectionSort() {
@@ -54,7 +33,7 @@ public class ArraySortingTests {
 
     System.out.println("unsorted: " + Arrays.toString(array));
 
-    ArraySorting.selectionSort(array);
+    IntArraySorting.selectionSort(array);
 
     System.out.println("sorted  : " + Arrays.toString(array));
   }
@@ -71,7 +50,7 @@ public class ArraySortingTests {
 
     System.out.println("unsorted: " + Arrays.toString(array));
 
-    ArraySorting.mergeSort(array);
+    IntArraySorting.mergeSort(array);
 
     System.out.println("sorted  : " + Arrays.toString(array));
   }
