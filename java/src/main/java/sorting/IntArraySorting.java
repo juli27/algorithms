@@ -6,8 +6,10 @@
 
 package sorting;
 
+import java.util.Objects;
+
 /**
- * "reference" implementations of various sorting algorithms on an integer array.
+ * Implementations of various sorting algorithms on an integer array.
  */
 public final class IntArraySorting {
 
@@ -15,15 +17,13 @@ public final class IntArraySorting {
   }
 
   /**
-   * property: stable
-   * property: in place
-   * property: loop invariant: array[0..i-1] contains the elements originally in array[0..i-1],
-   * but in sorted order.
-   * property: can sort as it gets new elements
+   * Sorts the given array in place. Insertion sort is stable.
    *
    * @param array the array of integers to be sorted
    */
   public static void insertionSort(int[] array) {
+    Objects.requireNonNull(array, "can't sort array null");
+
     // array[0..i-1] is sorted, array[i] to be inserted
     for (int i = 1; i < array.length; ++i) {
       int key = array[i];
