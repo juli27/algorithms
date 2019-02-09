@@ -14,6 +14,8 @@ repositories {
 dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.2")
   testImplementation("org.junit.jupiter:junit-jupiter-params:5.3.2")
+  testImplementation("com.google.truth:truth:0.42")
+
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.2")
 }
 
