@@ -17,9 +17,10 @@ public final class IntArraySorting {
   }
 
   /**
-   * Sorts the given array in place. Insertion sort is stable.
+   * Sorts the given array in place using insertion sort. Insertion sort is stable.
    *
    * @param array the array of integers to be sorted
+   * @throws NullPointerException if list is null
    */
   public static void insertionSort(int[] array) {
     Objects.requireNonNull(array, "can't sort array null");
