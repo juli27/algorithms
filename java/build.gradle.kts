@@ -14,6 +14,7 @@ repositories {
 dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
   testImplementation("com.google.truth:truth:0.42")
+  testImplementation("com.google.truth.extensions:truth-java8-extension:0.42")
 }
 
 tasks.test {
