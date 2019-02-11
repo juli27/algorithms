@@ -6,11 +6,25 @@
 
 package searching;
 
+import java.util.Objects;
 import java.util.OptionalInt;
 
-public class ArraySearching {
+/**
+ * Implementations of various searching algorithms on an integer array.
+ */
+public final class ArraySearching {
 
-  public OptionalInt linearSearch(int[] array, int value) {
+  /**
+   * Searches for the first occurrence of value in the given array using linear search.
+   *
+   * @param array the array to search through
+   * @param value the value to find
+   * @return An optional containing the index of the first occurrence of value or empty if not found
+   * @throws NullPointerException if array is null
+   */
+  public static OptionalInt linearSearch(int[] array, int value) {
+    Objects.requireNonNull(array);
+
     for (int i = 0; i < array.length; ++i) {
       if (array[i] == value) {
         return OptionalInt.of(i);

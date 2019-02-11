@@ -3,6 +3,10 @@ package sorting;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Implementations of various sorting algorithms on a generic list containing elements with a
+ * natural ordering.
+ */
 public final class ListSorting {
 
   private ListSorting() {
