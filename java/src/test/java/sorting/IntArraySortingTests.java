@@ -57,4 +57,29 @@ final class IntArraySortingTests {
     IntArraySorting.selectionSort(array);
     assertThat(array).asList().isOrdered();
   }
+
+  @Test
+  void testMergeSort() {
+    assertThrows(NullPointerException.class, () -> IntArraySorting.mergeSort(null));
+
+    // empty array
+    assertDoesNotThrow(() -> IntArraySorting.mergeSort(new int[]{}));
+
+    // one element
+    assertDoesNotThrow(() -> IntArraySorting.mergeSort(new int[]{0}));
+
+    // already sorted
+    int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    IntArraySorting.mergeSort(array);
+    assertThat(array).asList().isOrdered();
+
+    // worst case
+    array = new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    IntArraySorting.mergeSort(array);
+    assertThat(array).asList().isOrdered();
+
+    array = new int[]{-2, 10, 8, 8, 44, 4, 6, 2, 8, 99, -1};
+    IntArraySorting.mergeSort(array);
+    assertThat(array).asList().isOrdered();
+  }
 }

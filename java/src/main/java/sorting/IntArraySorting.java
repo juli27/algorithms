@@ -41,12 +41,6 @@ public final class IntArraySorting {
     }
   }
 
-  /**
-   * Sorts the given array in place using selection sort. Selection sort is not stable.
-   *
-   * @param array the array of integers to be sorted
-   * @throws NullPointerException if array is null
-   */
   public static void selectionSort(int[] array) {
     Objects.requireNonNull(array, "array can't be null");
 
@@ -71,7 +65,16 @@ public final class IntArraySorting {
     // array[len-1] is the largest element -> array[0..len-1] is sorted
   }
 
+  /**
+   * Sorts the given array using merge sort. Merge sort is stable.
+   * This implementation of merge sort is not in-place and requires O(n) space.
+   *
+   * @param array the array of integers to be sorted
+   * @throws NullPointerException if array is null
+   */
   public static void mergeSort(int[] array) {
+    Objects.requireNonNull(array, "array can't be null");
+
     mergeSort(array, 0, array.length - 1);
   }
 
@@ -88,10 +91,12 @@ public final class IntArraySorting {
   }
 
   /**
+   * Merges two sorted subsequences within the given array into one sorted sequence.
+   *
    * @param array     the array
-   * @param leftStart the leftmost element of the first sub array
-   * @param leftEnd   the last element of the left sub array
-   * @param rightEnd  the last element of the right sub array
+   * @param leftStart the leftmost element of the first subsequence within the array
+   * @param leftEnd   the last element of the left subsequence within the array
+   * @param rightEnd  the last element of the right subsequence within the array
    */
   private static void merge(int[] array, int leftStart, int leftEnd, int rightEnd) {
     int leftSize = leftEnd - leftStart + 1;
@@ -104,25 +109,17 @@ public final class IntArraySorting {
 
     int leftIndex = 0;
     int rightIndex = 0;
-    int i = leftStart;
 
+    int i = leftStart;
     while (leftIndex < leftSize && rightIndex < rightSize) {
       if (left[leftIndex] <= right[rightIndex]) {
-        array[i] = left[leftIndex++];
+        array[i++] = left[leftIndex++];
       } else {
-        array[i] = right[rightIndex++];
+        array[i++] = right[rightIndex++];
       }
-
-      ++i;
     }
 
-    // TODO: replace with System.arraycopy()?
-    for (; leftIndex < leftSize; ++leftIndex) {
-      array[i++] = left[leftIndex];
-    }
-
-    for (; rightIndex < rightSize; ++rightIndex) {
-      array[i++] = right[rightIndex];
-    }
+    System.arraycopy(left, leftIndex, array, i, leftSize - leftIndex);
+    System.arraycopy(right, rightIndex, array, i, rightSize - rightIndex);
   }
 }
