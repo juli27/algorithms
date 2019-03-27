@@ -20,7 +20,7 @@ public final class IntArraySorting {
    * Sorts the given array in place using insertion sort. Insertion sort is stable.
    *
    * @param array the array of integers to be sorted
-   * @throws NullPointerException if list is null
+   * @throws NullPointerException if array is null
    */
   public static void insertionSort(int[] array) {
     Objects.requireNonNull(array, "can't sort array null");
@@ -42,17 +42,21 @@ public final class IntArraySorting {
   }
 
   /**
-   * property: stable
-   * property: in place
-   * property: loop invariant:
+   * Sorts the given array in place using selection sort. Selection sort is not stable.
+   *
+   * @param array the array of integers to be sorted
+   * @throws NullPointerException if array is null
    */
   public static void selectionSort(int[] array) {
+    Objects.requireNonNull(array, "array can't be null");
+
+    // array[0..i-1] contains the i-1 smallest elements of array[0..len] in sorted order
     for (int i = 0; i < array.length - 1; ++i) {
       int minIndex = i;
 
       // find the minimum of the remaining unsorted array
       for (int j = i + 1; j < array.length; ++j) {
-        if (array[minIndex] > array[j]) {
+        if (array[j] < array[minIndex]) {
           minIndex = j;
         }
       }
@@ -62,6 +66,9 @@ public final class IntArraySorting {
       array[i] = array[minIndex];
       array[minIndex] = tmp;
     }
+
+    // array[0..len-2] contains he len-1 smallest elements of the original sequence in sorted order
+    // array[len-1] is the largest element -> array[0..len-1] is sorted
   }
 
   public static void mergeSort(int[] array) {

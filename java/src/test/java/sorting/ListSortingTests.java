@@ -34,4 +34,29 @@ final class ListSortingTests {
     ListSorting.insertionSort(list);
     assertThat(list).isOrdered();
   }
+
+  @Test
+  void testSelectionSort() {
+    assertThrows(NullPointerException.class, () -> ListSorting.selectionSort(null));
+
+    // empty list
+    assertDoesNotThrow(() -> ListSorting.selectionSort(List.<Integer>of()));
+
+    // one element
+    assertDoesNotThrow(() -> ListSorting.selectionSort(new ArrayList<Integer>()));
+
+    // already sorted
+    List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    ListSorting.selectionSort(list);
+    assertThat(list).isOrdered();
+
+    // worst case
+    list = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+    ListSorting.selectionSort(list);
+    assertThat(list).isOrdered();
+
+    list = Arrays.asList(-2, 10, 8, 8, 44, 4, 6, 2, 8, 99, -1);
+    ListSorting.selectionSort(list);
+    assertThat(list).isOrdered();
+  }
 }
