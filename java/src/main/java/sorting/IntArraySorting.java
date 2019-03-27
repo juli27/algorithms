@@ -41,6 +41,12 @@ public final class IntArraySorting {
     }
   }
 
+  /**
+   * Sorts the given array in place using selection sort. Selection sort is not stable.
+   *
+   * @param array the array of integers to be sorted
+   * @throws NullPointerException if array is null
+   */
   public static void selectionSort(int[] array) {
     Objects.requireNonNull(array, "array can't be null");
 
