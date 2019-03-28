@@ -67,7 +67,7 @@ public final class IntArraySorting {
       array[minIndex] = tmp;
     }
 
-    // array[0..len-2] contains he len-1 smallest elements of the original sequence in sorted order
+    // array[0..len-2] contains the len-1 smallest elements of the original sequence in sorted order
     // array[len-1] is the largest element -> array[0..len-1] is sorted
   }
 
