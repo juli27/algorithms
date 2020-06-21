@@ -12,11 +12,11 @@ repositories {
 }
 
 dependencies {
-  testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
-  testImplementation("com.google.truth:truth:0.42")
-  testImplementation("com.google.truth.extensions:truth-java8-extension:0.42")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+  testImplementation("com.google.truth:truth:1.0.1")
+  testImplementation("com.google.truth.extensions:truth-java8-extension:1.0.1")
 }
 
-tasks.test {
+tasks.named<Test>("test") {
   useJUnitPlatform()
 }
