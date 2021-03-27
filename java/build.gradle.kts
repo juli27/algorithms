@@ -11,15 +11,15 @@ repositories {
 }
 
 dependencies {
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
-  testImplementation("com.google.truth:truth:1.0.1")
-  testImplementation("com.google.truth.extensions:truth-java8-extension:1.0.1")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+  testImplementation("com.google.truth:truth:1.1.2")
+  testImplementation("com.google.truth.extensions:truth-java8-extension:1.1.2")
 }
 
 tasks.withType<JavaCompile> {
   options.isDeprecation = true
   options.encoding = "UTF-8"
-  options.release.set(14)
+  options.release.set(15)
 }
 
 tasks.withType<Test> {
