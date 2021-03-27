@@ -6,11 +6,6 @@ plugins {
 
 version = "0.1.0"
 
-java {
-  sourceCompatibility = JavaVersion.VERSION_14
-  targetCompatibility = JavaVersion.VERSION_14
-}
-
 repositories {
   mavenCentral()
 }
@@ -24,6 +19,7 @@ dependencies {
 tasks.withType<JavaCompile> {
   options.isDeprecation = true
   options.encoding = "UTF-8"
+  options.release.set(14)
 }
 
 tasks.withType<Test> {
