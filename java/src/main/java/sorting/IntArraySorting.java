@@ -6,28 +6,27 @@
 
 package sorting;
 
-import java.util.Objects;
+import java.util.Arrays;
+
+import static java.lang.System.arraycopy;
 
 /**
  * Implementations of various sorting algorithms on an integer array.
+ * <p>
+ * All methods in this class may throw a {@link NullPointerException} if null is passed in any
+ * parameter unless noted otherwise.
  */
 public final class IntArraySorting {
-
-  private IntArraySorting() {
-  }
 
   /**
    * Sorts the given array in place using insertion sort. Insertion sort is stable.
    *
    * @param array the array of integers to be sorted
-   * @throws NullPointerException if array is null
    */
   public static void insertionSort(int[] array) {
-    Objects.requireNonNull(array, "can't sort array null");
-
     // array[0..i-1] is sorted, array[i] to be inserted
     for (int i = 1; i < array.length; ++i) {
-      int key = array[i];
+      final int key = array[i];
 
       // move all elements in the sorted sequence greater than key up by one
       int j = i - 1;
@@ -45,11 +44,8 @@ public final class IntArraySorting {
    * Sorts the given array in place using selection sort. Selection sort is not stable.
    *
    * @param array the array of integers to be sorted
-   * @throws NullPointerException if array is null
    */
   public static void selectionSort(int[] array) {
-    Objects.requireNonNull(array, "array can't be null");
-
     // array[0..i-1] contains the i-1 smallest elements of array[0..len] in sorted order
     for (int i = 0; i < array.length - 1; ++i) {
       int minIndex = i;
@@ -72,60 +68,59 @@ public final class IntArraySorting {
   }
 
   /**
-   * Sorts the given array using merge sort. Merge sort is stable.
-   * This implementation of merge sort is not in-place and requires O(n) space.
+   * Sorts the given array using merge sort. Merge sort is stable. This implementation of merge sort
+   * is not in-place and requires O(n) space.
    *
    * @param array the array of integers to be sorted
    * @throws NullPointerException if array is null
    */
   public static void mergeSort(int[] array) {
-    Objects.requireNonNull(array, "array can't be null");
-
-    mergeSort(array, 0, array.length - 1);
+    mergeSort(array, 0, array.length);
   }
 
   private static void mergeSort(int[] array, int start, int end) {
-    if (start >= end) {
+    final int rightStart = (start + end) / 2;
+    if (start == rightStart) {
       return;
     }
 
-    int leftEnd = (start + end) / 2;
-
-    mergeSort(array, start, leftEnd);
-    mergeSort(array, leftEnd + 1, end);
-    merge(array, start, leftEnd, end);
+    mergeSort(array, start, rightStart);
+    mergeSort(array, rightStart, end);
+    merge(array, start, rightStart, end);
   }
 
   /**
    * Merges two sorted subsequences within the given array into one sorted sequence.
    *
-   * @param array     the array
-   * @param leftStart the leftmost element of the first subsequence within the array
-   * @param leftEnd   the last element of the left subsequence within the array
-   * @param rightEnd  the last element of the right subsequence within the array
+   * @param array      array to merge into
+   * @param leftStart  first element of the left subsequence
+   * @param rightStart first element of the right subsequence
+   * @param rightEnd   last element of the right subsequence, exclusive (might lie outside the
+   *                   array)
    */
-  private static void merge(int[] array, int leftStart, int leftEnd, int rightEnd) {
-    int leftSize = leftEnd - leftStart + 1;
-    int rightSize = rightEnd - leftEnd;
-    int[] left = new int[leftSize];
-    int[] right = new int[rightSize];
-
-    System.arraycopy(array, leftStart, left, 0, leftSize);
-    System.arraycopy(array, leftEnd + 1, right, 0, rightSize);
+  private static void merge(int[] array, int leftStart, int rightStart, int rightEnd) {
+    final int[] left = Arrays.copyOfRange(array, leftStart, rightStart);
+    final int[] right = Arrays.copyOfRange(array, rightStart, rightEnd);
+    final int leftSize = left.length;
+    final int rightSize = right.length;
 
     int leftIndex = 0;
     int rightIndex = 0;
 
     int i = leftStart;
     while (leftIndex < leftSize && rightIndex < rightSize) {
-      if (left[leftIndex] <= right[rightIndex]) {
-        array[i++] = left[leftIndex++];
+      final int leftElem = left[leftIndex];
+      final int rightElem = right[rightIndex];
+      if (leftElem <= rightElem) {
+        array[i++] = leftElem;
+        leftIndex++;
       } else {
-        array[i++] = right[rightIndex++];
+        array[i++] = rightElem;
+        rightIndex++;
       }
     }
 
-    System.arraycopy(left, leftIndex, array, i, leftSize - leftIndex);
-    System.arraycopy(right, rightIndex, array, i, rightSize - rightIndex);
+    arraycopy(left, leftIndex, array, i, leftSize - leftIndex);
+    arraycopy(right, rightIndex, array, i, rightSize - rightIndex);
   }
 }

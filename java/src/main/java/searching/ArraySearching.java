@@ -6,25 +6,24 @@
 
 package searching;
 
-import java.util.Objects;
 import java.util.OptionalInt;
 
 /**
  * Implementations of various searching algorithms on an integer array.
+ * <p>
+ * All methods in this class may throw a {@link NullPointerException} if null is passed in any
+ * parameter unless noted otherwise.
  */
 public final class ArraySearching {
 
   /**
-   * Searches for the first occurrence of value in the given array using linear search.
+   * Searches for the first occurrence of {@code value} in the given array using linear search.
    *
    * @param array the array to search through
    * @param value the value to find
-   * @return An optional containing the index of the first occurrence of value or empty if not found
-   * @throws NullPointerException if array is null
+   * @return The index of the first occurrence of value or empty if not found
    */
   public static OptionalInt linearSearch(int[] array, int value) {
-    Objects.requireNonNull(array);
-
     for (int i = 0; i < array.length; ++i) {
       if (array[i] == value) {
         return OptionalInt.of(i);
@@ -35,27 +34,27 @@ public final class ArraySearching {
   }
 
   /**
-   * Searches for the first occurrence of value in the given sorted array using binary search.
+   * Searches for the value in the given sorted array using binary search. The behaviour is
+   * undefined if array is not sorted.
    *
    * @param array the sorted array to search through
    * @param value the value to find
-   * @return An optional containing the index of the first occurrence of value or empty if not found
-   * @throws NullPointerException if array is null
+   * @return The index of value or empty if not found
    */
   public static OptionalInt binarySearch(int[] array, int value) {
-    Objects.requireNonNull(array);
-
     int low = 0;
     int high = array.length - 1;
     while (low <= high) {
-      int mid = (low + high) / 2;
+      final int mid = (low + high) / 2;
+      final int elem = array[mid];
+      final int cmp = Integer.compare(elem, value);
 
-      if (array[mid] == value) {
-        return OptionalInt.of(mid);
-      } else if (value < array[mid]) {
+      if (cmp < 0) {
+        low = mid + 1;
+      } else if (cmp > 0) {
         high = mid - 1;
       } else {
-        low = mid + 1;
+        return OptionalInt.of(mid);
       }
     }
 
