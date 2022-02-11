@@ -17,7 +17,6 @@ dependencies {
   testImplementation("com.google.truth.extensions:truth-java8-extension:1.1.3")
 
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-  testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.8.2")
 }
 
 tasks.withType<JavaCompile> {
