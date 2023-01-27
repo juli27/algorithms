@@ -33,6 +33,10 @@ tasks.withType<JavaCompile> {
   options.release.set(19)
 }
 
+tasks.compileTestJava {
+  options.compilerArgs.add("-parameters")
+}
+
 tasks.withType<Test> {
   useJUnitPlatform()
 
