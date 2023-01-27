@@ -114,3 +114,6 @@ gradle-app.setting
 ### IntelliJ project files
 *.iml
 .idea/
+
+### jqwik database
+.jqwik-database
